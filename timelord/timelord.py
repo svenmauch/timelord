@@ -5,10 +5,10 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 
 # config
-load_dotenv(find_dotenv())
+load_dotenv()
 
 TOKEN = os.environ.get("TL_TOKEN")
 COMMAND_PREFIX = os.environ.get("TL_COMMAND_PREFIX")
