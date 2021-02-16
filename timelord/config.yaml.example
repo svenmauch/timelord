@@ -1,0 +1,7 @@
+token: 'INSERT_YOUR_DISCORD_BOT_TOKEN_HERE'
+command_prefix: '!tl '
+logfile: 'timelord.log'
+logformat: '[%(asctime)s] (%(levelname)s) %(message)s'
+emoji_yes: '\U0001F7E2'
+emoji_maybe: '\U0001F7E1'
+emoji_no: '\U0001F534'
