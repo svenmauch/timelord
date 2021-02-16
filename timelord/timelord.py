@@ -46,11 +46,11 @@ async def get_ping_list(message, guild):
     ping_list = []
     for reaction in message.reactions:
         users = await reaction.users().flatten()
-        if reaction.emoji == EMOJI_YES:
+        if str(reaction.emoji) == EMOJI_YES:
             for user in users:
                 if user.id != bot.user.id:
                     ping_list.append(guild.get_member(user.id).mention)
-        if reaction.emoji == EMOJI_MAYBE:
+        if str(reaction.emoji) == EMOJI_MAYBE:
             for user in users:
                 if user.id != bot.user.id:
                     ping_list.append(guild.get_member(user.id).mention)
