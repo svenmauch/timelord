@@ -1,37 +1,34 @@
+import os
 from datetime import datetime
 import logging
-import yaml
 import discord
 from discord.ext import commands
 from discord.ext.commands import CommandNotFound
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-
-scheduler = AsyncIOScheduler()
-scheduler.start()
+from dotenv import load_dotenv, find_dotenv
 
 # config
-with open('config.yaml') as config_file:
-    config = yaml.safe_load(config_file)
+load_dotenv(find_dotenv())
 
-COMMAND_PREFIX = config['command_prefix']
-EMOJI_YES = config['emoji_yes']
-EMOJI_MAYBE = config['emoji_maybe']
-EMOJI_NO = config['emoji_no']
+TOKEN = os.environ.get("TL_TOKEN")
+COMMAND_PREFIX = os.environ.get("TL_COMMAND_PREFIX")
+EMOJI_YES = os.environ.get("TL_EMOJI_YES")
+EMOJI_MAYBE = os.environ.get("TL_EMOJI_MAYBE")
+EMOJI_NO = os.environ.get("TL_EMOJI_NO")
 
 # logging
 logging.getLogger('discord').setLevel(logging.ERROR)
 logging.getLogger('discord.http').setLevel(logging.WARNING)
 log = logging.getLogger()
 log.setLevel(logging.INFO)
-logformat = logging.Formatter(config['logformat'])
+logformat = logging.Formatter('[%(asctime)s] (%(levelname)s) %(message)s')
 consolehandler = logging.StreamHandler()
 consolehandler.setFormatter(logformat)
 log.addHandler(consolehandler)
-filehandler = logging.FileHandler(filename=config['logfile'], encoding='utf-8', mode='a')
-filehandler.setFormatter(logformat)
-log.addHandler(filehandler)
 
 # init bot
+scheduler = AsyncIOScheduler()
+scheduler.start()
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix=COMMAND_PREFIX, intents=intents)
@@ -178,7 +175,6 @@ async def help(ctx):
 
 @bot.command(name='add')
 async def add(ctx, time, *, topic):
-    # todo: input validation
     try:
         time = datetime.strptime(time, "%H:%M")
     except:
@@ -218,4 +214,4 @@ async def events(ctx):
 
 # start bot
 log.info("### starting bot ###")
-bot.run(config['token'])
+bot.run(TOKEN)

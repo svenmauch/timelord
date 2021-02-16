@@ -1,0 +1,5 @@
+services:
+  timelord:
+    image: timelord:latest
+    environment:
+      -
