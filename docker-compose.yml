@@ -2,4 +2,8 @@ services:
   timelord:
     image: timelord:latest
     environment:
-      -
+      - TL_TOKEN='INSERT_YOUR_DISCORD_BOT_TOKEN_HERE'
+      - TL_COMMAND_PREFIX='!tl '
+      - TL_EMOJI_YES='\U0001F7E2'
+      - TL_EMOJI_MAYBE='\U0001F7E1'
+      - TL_EMOJI_NO='\U0001F534'
