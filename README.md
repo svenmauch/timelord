@@ -1,5 +1,4 @@
 <h1 align="center">
-<br>
 <img src="https://mauch.me/img/timelord.png">
 <br>
 timelord
